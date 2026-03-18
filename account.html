@@ -481,20 +481,23 @@
             return mitzvahScore >= aveirahScore ? "mitzvah" : "aveirah";
         }
 
-        function validateTypeOrBlock(expectedType, text, modalMessageId) {
+        function resolveTypeForSave(expectedType, text, modalMessageId) {
             const detected = detectTypeFromText(text);
             if (detected === "unknown") {
-                showModalMessage(modalMessageId, "קען נישט קלאר באשטימען. ביטע שרייב קלארער פרטים.", "error");
-                return false;
+                return expectedType;
             }
 
             if (detected !== expectedType) {
                 const label = detected === "mitzvah" ? "מצוה" : "עבירה";
-                showModalMessage(modalMessageId, `ס׳קוקט אויס ווי ${label}. לייג עס אין די ריכטיגע פארעם.`, "error");
-                return false;
+                const shouldSwitch = window.confirm(`ס׳קוקט אויס ווי ${label}. ווילסטו עס ראטעווען אלס ${label}?`);
+                if (!shouldSwitch) {
+                    showModalMessage(modalMessageId, "געבליבן אין יעצטיגע פארעם. דו קענסט ענדערן און נאכאמאל ראטעווען.", "error");
+                    return null;
+                }
+                return detected;
             }
 
-            return true;
+            return expectedType;
         }
 
         function toDateOnly(record) {
@@ -576,20 +579,29 @@
             }
 
             const combinedText = `${title} ${details || ""}`;
-            if (!validateTypeOrBlock("mitzvah", combinedText, "mitzvah-modal-message")) {
+            const resolvedType = resolveTypeForSave("mitzvah", combinedText, "mitzvah-modal-message");
+            if (!resolvedType) {
                 return;
             }
 
-            saveRecord({
-                type: "mitzvah",
+            const recordPayload = {
+                type: resolvedType,
                 title,
                 details,
                 category,
-                effort,
                 happenedOn
-            });
+            };
 
-            showModalMessage("mitzvah-modal-message", "מצוה געשפייכערט.", "success");
+            if (resolvedType === "mitzvah") {
+                recordPayload.effort = effort;
+            } else {
+                recordPayload.severity = "3";
+                recordPayload.fixed = false;
+            }
+
+            saveRecord(recordPayload);
+
+            showModalMessage("mitzvah-modal-message", resolvedType === "mitzvah" ? "מצוה געשפייכערט." : "געשפייכערט אלס עבירה.", "success");
             setTimeout(() => {
                 const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById("mitzvahModal"));
                 modal.hide();
@@ -614,21 +626,29 @@
             }
 
             const combinedText = `${title} ${details || ""}`;
-            if (!validateTypeOrBlock("aveirah", combinedText, "aveirah-modal-message")) {
+            const resolvedType = resolveTypeForSave("aveirah", combinedText, "aveirah-modal-message");
+            if (!resolvedType) {
                 return;
             }
 
-            saveRecord({
-                type: "aveirah",
+            const recordPayload = {
+                type: resolvedType,
                 title,
                 details,
                 category,
-                severity,
-                fixed,
                 happenedOn
-            });
+            };
 
-            showModalMessage("aveirah-modal-message", "עבירה געשפייכערט.", "success");
+            if (resolvedType === "aveirah") {
+                recordPayload.severity = severity;
+                recordPayload.fixed = fixed;
+            } else {
+                recordPayload.effort = "מיטל";
+            }
+
+            saveRecord(recordPayload);
+
+            showModalMessage("aveirah-modal-message", resolvedType === "aveirah" ? "עבירה געשפייכערט." : "געשפייכערט אלס מצוה.", "success");
             setTimeout(() => {
                 const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById("aveirahModal"));
                 modal.hide();
