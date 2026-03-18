@@ -60,52 +60,64 @@
     </div>
 
     <section class="account-section">
-        <div class="account-card">
-            <h1>מיין חשבון</h1>
-            <p class="account-sub">ברוך הבא, <span id="account-name">...</span> (<span id="account-nickname">...</span>)
-            </p>
-            <p class="account-note">דו ביסט אריינגעלאגט.</p>
-            <div class="profile-panel">
-                <p class="small text-secondary mb-1"><strong>Login Name:</strong> <span id="profile-login-name">-</span>
-                </p>
-                <p class="small text-secondary mb-1"><strong>Display Name:</strong> <span
-                        id="profile-display-name">-</span></p>
-                <p class="small text-secondary mb-1"><strong>פען נאמען:</strong> <span id="profile-nickname">-</span>
-                </p>
-                <button id="open-profile-modal-btn" class="btn btn-outline-primary btn-sm" type="button"
-                    data-bs-toggle="modal" data-bs-target="#profileModal">Edit Profile</button>
-            </div>
-            <div class="tracker-wrap p-3">
-                <h2 class="tracker-title">מצוות און עבירות טרעקער</h2>
-                <div
-                    class="tracker-actions d-flex flex-column flex-sm-row justify-content-center align-items-stretch gap-2 mt-2">
-                    <button id="open-mitzvah-modal-btn" class="btn auth-btn px-4" type="button" data-bs-toggle="modal"
-                        data-bs-target="#mitzvahModal">+ מצוה</button>
-                    <button id="open-aveirah-modal-btn" class="btn btn-outline-danger px-4" type="button"
-                        data-bs-toggle="modal" data-bs-target="#aveirahModal">+ עבירה</button>
-                </div>
-                <p id="tracker-message" class="auth-message" aria-live="polite"></p>
+        <div class="account-shell">
+            <header class="account-hero-panel">
+                <h1>מיין חשבון</h1>
+                <p class="account-sub">ברוך הבא, <span id="account-name">...</span> (<span id="account-nickname">...</span>)</p>
+                <p class="account-note">דא קענסטו פירן דיין טאג מיט א קלארע בליק אויף מצוות און עבירות.</p>
+            </header>
 
-                <div class="tracker-summary row g-2 mt-2">
-                    <div class="col-12 col-md-6">
-                        <div class="summary-pill mitzvah-pill text-center">מצוות: <span id="mitzvah-count">0</span>
+            <div class="account-dashboard">
+                <aside class="account-sidebar">
+                    <div class="profile-panel account-panel">
+                        <h2 class="account-panel-title">פרופיל</h2>
+                        <p class="small text-secondary mb-1"><strong>Login Name:</strong> <span
+                                id="profile-login-name">-</span></p>
+                        <p class="small text-secondary mb-1"><strong>Display Name:</strong> <span
+                                id="profile-display-name">-</span></p>
+                        <p class="small text-secondary mb-1"><strong>פען נאמען:</strong> <span id="profile-nickname">-</span>
+                        </p>
+                        <button id="open-profile-modal-btn" class="btn btn-outline-primary btn-sm" type="button"
+                            data-bs-toggle="modal" data-bs-target="#profileModal">Edit Profile</button>
+                    </div>
+
+                    <div class="account-panel tracker-summary-wrap">
+                        <h2 class="account-panel-title">קיצור סטאטוס</h2>
+                        <div class="tracker-summary row g-2 mt-1">
+                            <div class="col-12">
+                                <div class="summary-pill mitzvah-pill text-center">מצוות: <span id="mitzvah-count">0</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="summary-pill aveirah-pill text-center">עבירות: <span id="aveirah-count">0</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <div class="summary-pill aveirah-pill text-center">עבירות: <span id="aveirah-count">0</span>
-                        </div>
+
+                    <button id="logout-btn" class="btn auth-btn w-100">לאָג ארויס</button>
+                </aside>
+
+                <div class="tracker-wrap account-panel p-3">
+                    <h2 class="tracker-title">מצוות און עבירות טרעקער</h2>
+                    <div
+                        class="tracker-actions d-flex flex-column flex-sm-row justify-content-start align-items-stretch gap-2 mt-2">
+                        <button id="open-mitzvah-modal-btn" class="btn auth-btn px-4" type="button" data-bs-toggle="modal"
+                            data-bs-target="#mitzvahModal">+ מצוה</button>
+                        <button id="open-aveirah-modal-btn" class="btn btn-outline-danger px-4" type="button"
+                            data-bs-toggle="modal" data-bs-target="#aveirahModal">+ עבירה</button>
                     </div>
-                </div>
+                    <p id="tracker-message" class="auth-message" aria-live="polite"></p>
 
-                <div class="tracker-chart-wrap mt-3 p-3 border rounded-3 bg-white">
-                    <h3 class="tracker-record-title">Period Chart</h3>
-                    <div id="period-chart" class="period-chart"></div>
-                </div>
+                    <div class="tracker-chart-wrap mt-3 p-3 border rounded-3 bg-white">
+                        <h3 class="tracker-record-title">Period Chart</h3>
+                        <div id="period-chart" class="period-chart"></div>
+                    </div>
 
-                <h3 class="tracker-record-title mt-3">Track Record</h3>
-                <ul id="record-list" class="record-list mt-2"></ul>
+                    <h3 class="tracker-record-title mt-3">Track Record</h3>
+                    <ul id="record-list" class="record-list mt-2"></ul>
+                </div>
             </div>
-            <button id="logout-btn" class="btn auth-btn">לאָג ארויס</button>
         </div>
     </section>
 

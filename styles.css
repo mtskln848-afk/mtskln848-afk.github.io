@@ -459,46 +459,77 @@ body {
 
 .account-section {
     min-height: calc(100vh - var(--nav-height));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    background: linear-gradient(180deg, var(--logo-cream) 0%, #fff7ef 100%);
+    padding: 2.2rem 1rem 3rem;
+    background:
+        radial-gradient(circle at 92% 16%, rgba(165, 199, 226, 0.22) 0%, rgba(165, 199, 226, 0) 40%),
+        radial-gradient(circle at 14% 78%, rgba(178, 208, 172, 0.24) 0%, rgba(178, 208, 172, 0) 42%),
+        linear-gradient(180deg, var(--logo-cream) 0%, #fff7ef 100%);
 }
 
-.account-card {
-    width: min(820px, 100%);
+.account-shell {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+}
+
+.account-hero-panel {
     background: #fffdf9;
     border: 1px solid var(--logo-border);
-    border-radius: 14px;
-    padding: 1.5rem;
-    text-align: center;
+    border-radius: 16px;
+    padding: 1.25rem 1.3rem;
+    margin-bottom: 1rem;
 }
 
-.account-card h1 {
-    margin: 0 0 0.75rem;
+.account-hero-panel h1 {
+    margin: 0 0 0.45rem;
     font-family: "Playpen Sans Hebrew", sans-serif;
     color: var(--logo-blue-deep);
 }
 
 .account-sub {
     margin: 0;
-    font-size: 1.15rem;
+    font-size: 1.08rem;
     color: #5f7180;
 }
 
 .account-note {
-    margin: 0.4rem 0 1rem;
+    margin: 0.45rem 0 0;
     color: #704f38;
 }
 
-.profile-panel {
-    margin: 0 0 1rem;
-    padding: 0.8rem 0.9rem;
+.account-dashboard {
+    display: grid;
+    grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+.account-sidebar {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.account-panel {
+    background: #fffdf9;
     border: 1px solid var(--logo-border);
-    border-radius: 12px;
-    background: #fffefb;
+    border-radius: 14px;
+}
+
+.account-panel-title {
+    margin: 0 0 0.6rem;
+    font-family: "Playpen Sans Hebrew", sans-serif;
+    color: var(--logo-blue-deep);
+    font-size: 1.02rem;
+}
+
+.profile-panel {
+    margin: 0;
+    padding: 0.95rem 1rem;
+    background: linear-gradient(180deg, #fffefb 0%, #fff8ef 100%);
     text-align: right;
+}
+
+.tracker-summary-wrap {
+    padding: 0.9rem 1rem;
 }
 
 #open-profile-modal-btn {
@@ -506,17 +537,16 @@ body {
 }
 
 .tracker-wrap {
-    margin: 1rem 0 1.2rem;
-    border: 1px solid var(--logo-border);
-    border-radius: 12px;
-    background: #fffcf6;
+    margin: 0;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fffdf9 0%, #fffbf2 100%);
     text-align: right;
 }
 
 .tracker-title {
     font-family: "Playpen Sans Hebrew", sans-serif;
     color: var(--logo-blue-deep);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin: 0 0 0.5rem;
 }
 
@@ -615,6 +645,10 @@ body {
     gap: 0.4rem;
     max-height: 340px;
     overflow-y: auto;
+}
+
+#logout-btn {
+    margin-top: 0.15rem;
 }
 
 .record-item {
@@ -770,6 +804,14 @@ body {
 
     .pricing-grid {
         grid-template-columns: 1fr;
+    }
+
+    .account-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .account-hero-panel {
+        padding: 1.05rem 1rem;
     }
 
     .pricing-badge {
