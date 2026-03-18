@@ -481,7 +481,7 @@
             return mitzvahScore >= aveirahScore ? "mitzvah" : "aveirah";
         }
 
-        function resolveTypeForSave(expectedType, text, modalMessageId) {
+        function resolveTypeForSave(expectedType, text, modalMessageId, allowFallbackToExpected = false) {
             const detected = detectTypeFromText(text);
             if (detected === "unknown") {
                 return expectedType;
@@ -491,6 +491,10 @@
                 const label = detected === "mitzvah" ? "מצוה" : "עבירה";
                 const shouldSwitch = window.confirm(`ס׳קוקט אויס ווי ${label}. ווילסטו עס ראטעווען אלס ${label}?`);
                 if (!shouldSwitch) {
+                    if (allowFallbackToExpected) {
+                        showModalMessage(modalMessageId, "געראטעוועט אין יעצטיגע פארעם.", "success");
+                        return expectedType;
+                    }
                     showModalMessage(modalMessageId, "געבליבן אין יעצטיגע פארעם. דו קענסט ענדערן און נאכאמאל ראטעווען.", "error");
                     return null;
                 }
@@ -626,7 +630,7 @@
             }
 
             const combinedText = `${title} ${details || ""}`;
-            const resolvedType = resolveTypeForSave("aveirah", combinedText, "aveirah-modal-message");
+            const resolvedType = resolveTypeForSave("aveirah", combinedText, "aveirah-modal-message", true);
             if (!resolvedType) {
                 return;
             }
