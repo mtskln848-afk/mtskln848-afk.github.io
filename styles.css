@@ -77,6 +77,7 @@ body {
     display: inline-flex;
     align-items: flex-end;
     gap: 0.02em;
+    color: inherit;
 }
 
 #my-navbar .brand-words {
@@ -99,17 +100,45 @@ body {
 #my-navbar .brand-tes {
     font-size: 1.72em;
     line-height: 0.72;
-    color: #704f38;
+    color: inherit;
     margin-right: -0.03em;
 }
 
 #my-navbar .brand-marks {
-    font-size: 0.78em;
+    position: relative;
+    display: inline-block;
+    width: 1.2em;
+    height: 1.15em;
+    margin-right: -0.04em;
+    margin-bottom: 0.3em;
+    color: inherit;
+}
+
+#my-navbar .brand-mark {
+    position: absolute;
+    display: block;
+    font-size: 0.62em;
     line-height: 1;
-    letter-spacing: -0.08em;
-    color: #704f38;
-    margin-bottom: 0.36em;
-    margin-right: -0.02em;
+    color: inherit;
+    transform-origin: center;
+}
+
+#my-navbar .brand-mark-one {
+    right: 0.8em;
+    bottom: 0.05em;
+    transform: rotate(-22deg);
+}
+
+#my-navbar .brand-mark-two {
+    right: 0.42em;
+    bottom: 0.42em;
+    transform: rotate(14deg);
+}
+
+#my-navbar .brand-mark-three {
+    right: 0.02em;
+    bottom: 0.76em;
+    transform: rotate(29deg);
 }
 
 #my-navbar .navbar-brand:hover,
