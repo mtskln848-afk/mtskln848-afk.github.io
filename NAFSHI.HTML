@@ -255,7 +255,7 @@
 
             saveUsers(users);
             const notification = await notifyOwnerOnSignup(users[userKey]);
-            showMessage(createMessage, "חשבון געשאַפֿן. דו קענסט איצט לאָג אַריין.", "success");
+            showMessage(createMessage, "חשבון געשאַפֿן. דו קענסט יעצט לאָג אַריין.", "success");
             if (!notification.sent && notification.reason !== "missing-endpoint") {
                 console.warn("Signup created, but owner notification failed:", notification.reason);
             }
